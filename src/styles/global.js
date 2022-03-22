@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
         --yellow-ligth: #FBE192;
 
         --gray-dark: #7B8B99;
-        --gray: #C3CFD9;
+        --header: #C3CFD9;
         --gray-ligth: #DFE6ED;
         --gray-ligth-2: #D4D4D4;
         
