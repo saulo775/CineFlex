@@ -13,7 +13,8 @@ export const GlobalStyle = createGlobalStyle`
 
         --gray-dark: #7B8B99;
         --header: #C3CFD9;
-        --gray-ligth: #DFE6ED;
+        --gray: #9EADBA;
+        --footer: #DFE6ED;
         --gray-ligth-2: #D4D4D4;
         
         --text-white: #FFFFFF;
