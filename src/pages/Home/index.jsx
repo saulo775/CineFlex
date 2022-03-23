@@ -1,7 +1,8 @@
 import React from "react";
+import { Title } from "../../components/Title";
 
 export function Home() {
     return (
-        <h1>Home</h1>
+        <Title text="Selecione o filme"/>
     )
 }
