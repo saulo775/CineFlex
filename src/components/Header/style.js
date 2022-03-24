@@ -5,7 +5,7 @@ export const Container = styled.header`
     align-items: center;
     justify-content: center;
     max-width: 40rem;
-    height: 4rem;
+    min-height: 4rem;
     background-color: var(--header);
     z-index: 5;
     position: sticky;

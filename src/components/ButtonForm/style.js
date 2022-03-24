@@ -10,6 +10,7 @@ export const Container = styled.button`
     width: 14rem;
     background-color: var(--primary);
     border: none;
+    border-radius: 0.25rem;
     margin: 3.5rem auto 2rem;
     padding: 0.75rem 0;
 `;
