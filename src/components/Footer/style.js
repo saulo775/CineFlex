@@ -1,13 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.footer`
-    flex: 1;
     display: flex;
     gap: 1rem;
     align-items: center;
     max-width: 40rem;
-    position: fixed;
-    bottom: 0;
     padding: 1rem 1.5rem;
     border-top: 2px solid var(--gray);
     background-color: var(--footer);
@@ -15,6 +12,12 @@ export const Container = styled.footer`
     p,h2 {
         font-size: 1.5rem;
         color: var(--text-black);
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        max-width: 40rem;
     }
 `;
 

@@ -5,10 +5,10 @@ export function Footer({url_select_movie}) {
     return (
         <Container>
             <BannerMovieSelected url_select_movie={url_select_movie}/>
-            <div>
+            <section>
                 <h2>The Batman</h2>
                 <p>Sexta-feira - 15:00</p>
-            </div>
+            </section>
         </Container>
     )
 }
