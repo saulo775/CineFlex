@@ -7,6 +7,9 @@ export const Container = styled.header`
     max-width: 40rem;
     height: 4rem;
     background-color: var(--header);
+    z-index: 5;
+    position: sticky;
+    top: 0;
 
     h1{
         font-size: 2rem;

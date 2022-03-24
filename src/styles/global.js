@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
 
     :root{
         --primary: #E8833A;
-        --background: #FFFFFF
+        --background: #FFFFFF;
         --green: #1AAE9E;
         --green-ligth: #8DD7CF;
         --yellow: #F7C52B;
@@ -20,6 +20,10 @@ export const GlobalStyle = createGlobalStyle`
         --text-white: #FFFFFF;
         --text-black: #293845;
         --placeholder-color: #AFAFAF;
+
+
+        --seat-available: #C3CFD9;
+        --border1: #808F9D;
     }
 
     * {
@@ -41,8 +45,12 @@ export const GlobalStyle = createGlobalStyle`
     body{
         -webkit-font-smooth: antialiased;
         font-family: 'Roboto', sans-serif;
+        position: relative;
     }
 
+    h1, h2, h3, h4, p, li, label {
+        color: var(--text-black);
+    }
     a{
         text-decoration: none;
         color: currentColor;

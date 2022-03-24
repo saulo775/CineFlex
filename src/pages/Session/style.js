@@ -1,16 +1,25 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    flex: 1;
     display: flex;
     gap: 1.5rem;
     flex-direction: column;
+    height: 90vh;
     max-width: 40rem;
-    padding: 0 1.5rem;
     overflow-y: scroll;
+    justify-content: space-between;
+    `;
+
+export const Content = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 1.5rem;
+    gap: 1.5rem;
 `;
 
 export const DateSession = styled.div`
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;

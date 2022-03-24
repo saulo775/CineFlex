@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Content } from "./style";
+import { Container } from "./style";
 
 export function Movie({image_source}){
     return (
