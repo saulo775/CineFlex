@@ -1,4 +1,7 @@
 import React from "react";
+import axios from "axios";
+
+import { Header } from "../../components/Header";
 import { Movie } from "../../components/Movie";
 import { Title } from "../../components/Title";
 
@@ -7,15 +10,34 @@ import {
 } from "./style";
 
 export function Home() {
+    const [movies, setMovies] = React.useState([]);
+
+
+    React.useEffect(()=>{
+        const response = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
+        response.then(({data})=>{
+            setMovies(data);
+        }).catch((error)=>{
+            console.log(error)
+        });
+    },[]);
+    
     return (
         <>
+            <Header/>
             <Title text="Selecione o filme"/>   
             <Container>
-                <Movie image_source={"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQt8yNufq2Jp9-D4BrCYYW5Y_jm8HXRE6NDczXQbTjV-5DMBS4o"}/>
-                <Movie image_source={"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQt8yNufq2Jp9-D4BrCYYW5Y_jm8HXRE6NDczXQbTjV-5DMBS4o"}/>
-                <Movie image_source={"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQt8yNufq2Jp9-D4BrCYYW5Y_jm8HXRE6NDczXQbTjV-5DMBS4o"}/>
-                <Movie image_source={"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQt8yNufq2Jp9-D4BrCYYW5Y_jm8HXRE6NDczXQbTjV-5DMBS4o"}/>
-                <Movie image_source={"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQt8yNufq2Jp9-D4BrCYYW5Y_jm8HXRE6NDczXQbTjV-5DMBS4o"}/>
+                {
+                    movies.map(({id,posterURL}) => {
+                        return(
+                            <Movie 
+                                key={id}
+                                image_source={posterURL}
+                            />
+                        )
+                    })
+                    
+                }
             </Container>
         </>
         

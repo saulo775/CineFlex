@@ -1,7 +1,6 @@
 import React from "react";
 import { Title } from "../../components/Title";
 import { ButtonForm } from "../../components/ButtonForm";
-import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 
 
