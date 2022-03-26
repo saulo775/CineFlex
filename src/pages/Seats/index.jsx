@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 import { Header } from "../../components/Header";
 import { Title } from "../../components/Title";
@@ -15,28 +17,52 @@ import {
 } from "./style";
 
 export function Seats() {
+    const [seatsAPI, setSeatsAPI] = React.useState([]);
+
+    const { IDsessao } = useParams();
+
+    /*===CONSOLE===*/
+    /*===CONSOLE===*/
+    /*===CONSOLE===*/
+    //console.log(IDsessao);
+
+    React.useEffect(()=>{
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${IDsessao}/seats`)
+        promise.then((response)=>{
+            const { data } = response;
+            /*===CONSOLE===*/
+            /*===CONSOLE===*/
+            /*===CONSOLE===*/
+            //console.log(data.seats);
+            setSeatsAPI(data.seats)
+            /*===CONSOLE===*/
+            /*===CONSOLE===*/
+            /*===CONSOLE===*/
+        })
+        promise.catch((err)=>{
+            console.error(err);
+        });
+    },[]);
+
     return (
         <Container>
             <Header/>
             <Content>
                 <Title text={"Selecione o(s) assento(s)"}/>
                 <SeatsContainer>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={15}/>
-                    <Seat number_seat={31}/>
-                    <Seat number_seat={55}/>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={1}/>
-                    <Seat number_seat={1}/>
+                    {
+                        seatsAPI.map(({id, isAvailable, name})=> {
+                            return(
+                                <Seat 
+                                    key={id}
+                                    id={id}
+                                    number_seat={name}
+                                    is_available={isAvailable}
+                                />
+                            )
+                        })
+                    }
+
                 </SeatsContainer>
 
                 <Legend>

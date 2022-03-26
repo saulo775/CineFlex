@@ -50,17 +50,17 @@ export const Legend = styled.ul`
 
     li:nth-child(2)::before {
         content: '';
-        background-color: var(--yellow-ligth);
-        border: solid 1px var(--yellow);
+        background-color: var(--seat-available);
+        border: solid 1px var(--border1);
         width: 1.25rem;
         height: 1.25rem;
         border-radius: 50%;
     }
-
+    
     li:nth-child(3)::before {
         content: '';
-        background-color: var(--seat-available);
-        border: solid 1px var(--border1);
+        background-color: var(--yellow-ligth);
+        border: solid 1px var(--yellow);
         width: 1.25rem;
         height: 1.25rem;
         border-radius: 50%;
