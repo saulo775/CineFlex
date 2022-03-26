@@ -1,16 +1,38 @@
 import React from "react";
-import { SeatAvailable, SeatNotAvailable } from "./style";
+import { SeatAvailable, SeatNotAvailable, SeatSelected} from "./style";
 
-export function Seat({id, number_seat, is_available}) {
-    
+export function Seat({number_seat, is_available}) {
+    const [status, setStatus] = React.useState(true);
+
+    function handleSelectSeat() {
+        setStatus(!status);
+    }
 
     if (is_available) {
-        return (
-            <SeatAvailable>{number_seat}</SeatAvailable>
-        )
+        if (status) {
+            return (
+                <SeatAvailable
+                    onClick={handleSelectSeat}
+                >
+                    {number_seat}
+                </SeatAvailable>
+            )
+        }else{
+            return (
+                <SeatSelected 
+                    onClick={handleSelectSeat}
+                >
+                    {number_seat}
+                </SeatSelected>
+            )
+        }
     }else{
         return(
-            <SeatNotAvailable>{number_seat}</SeatNotAvailable>
+            <SeatNotAvailable
+                onClick={()=>{
+                    alert("Esse assento não está disponível")
+                }}
+            >{number_seat}</SeatNotAvailable>
         )
     }
 

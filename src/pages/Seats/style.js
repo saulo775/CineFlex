@@ -17,8 +17,9 @@ export const Content = styled.div`
 `;
 
 export const SeatsContainer = styled.div`
-    display: flex;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 0.5rem 0.2rem ;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;

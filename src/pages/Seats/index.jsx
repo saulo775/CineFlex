@@ -18,26 +18,13 @@ import {
 
 export function Seats() {
     const [seatsAPI, setSeatsAPI] = React.useState([]);
-
     const { IDsessao } = useParams();
-
-    /*===CONSOLE===*/
-    /*===CONSOLE===*/
-    /*===CONSOLE===*/
-    //console.log(IDsessao);
 
     React.useEffect(()=>{
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${IDsessao}/seats`)
         promise.then((response)=>{
             const { data } = response;
-            /*===CONSOLE===*/
-            /*===CONSOLE===*/
-            /*===CONSOLE===*/
-            //console.log(data.seats);
             setSeatsAPI(data.seats)
-            /*===CONSOLE===*/
-            /*===CONSOLE===*/
-            /*===CONSOLE===*/
         })
         promise.catch((err)=>{
             console.error(err);
@@ -90,7 +77,9 @@ export function Seats() {
                     <ButtonForm title={"Reservar Assentos"}/>
                 </ClientData>
             </Content>
-            <Footer url_select_movie={"https://m.media-amazon.com/images/I/81ugxFdBZBL._AC_SY550_.jpg"}/>
+            <Footer 
+                url_select_movie
+            />
         </Container>
     )
 }
