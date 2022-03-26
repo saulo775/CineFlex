@@ -5,7 +5,7 @@ import { Container } from "./style";
 export function Movie({id,image_source, movie_name}){
     return (
         <Container >
-            <Link to={`/sessions/${id}`}>
+            <Link to={`/sessoes/${id}`}>
                 <img src={image_source} alt={movie_name} />
             </Link>
         </Container>

@@ -11,16 +11,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/sessions/:IDmovie" element={<Session/>}/>
+        <Route path="/sessoes/:IDmovie" element={<Session/>}/>
+        <Route path="/assentos/:idSessao" element={<Seats/>}/>
       </Routes>
-
-      {/* 
-      <Home/> 
-      <Session/> 
-      <Seats/>
-      <Success/>
-    */}
-    
     </BrowserRouter>
     
   );
