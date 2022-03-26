@@ -12,31 +12,31 @@ import {
 export function Home() {
     const [movies, setMovies] = React.useState([]);
 
-
     React.useEffect(()=>{
         const response = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
         response.then(({data})=>{
             setMovies(data);
         }).catch((error)=>{
-            console.log(error)
+            console.log(error);
         });
     },[]);
-    
+
     return (
         <>
             <Header/>
             <Title text="Selecione o filme"/>   
             <Container>
                 {
-                    movies.map(({id,posterURL}) => {
+                    movies.map(({id, posterURL, title}) => {
                         return(
                             <Movie 
                                 key={id}
+                                id={id}
                                 image_source={posterURL}
+                                movie_name={title}
                             />
                         )
                     })
-                    
                 }
             </Container>
         </>

@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Container } from "./style";
 
-export function Movie({image_source}){
+export function Movie({id,image_source, movie_name}){
     return (
-        <Container 
-            image_source={image_source}
-        />
+        <Container >
+            <Link to={`/sessions/${id}`}>
+                <img src={image_source} alt={movie_name} />
+            </Link>
+        </Container>
     )
 }

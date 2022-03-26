@@ -1,7 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import { Header } from "./components/Header";
 import { Home } from "./pages/Home";
 import { Seats } from "./pages/Seats";
 import { Session } from "./pages/Session";
@@ -13,6 +11,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/sessions/:IDmovie" element={<Session/>}/>
       </Routes>
 
       {/* 

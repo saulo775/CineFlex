@@ -1,41 +1,58 @@
 import React from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
+import { Header } from "../../components/Header";
 import { Title } from "../../components/Title";
 import { Footer } from "../../components/Footer";
 
-
 import {
-    Container,
-    Content,
-    DateSession, 
-    Day, 
-    Hour
+    Container, Content, DateSession, Day, Hour,
 } from "./style";
-import { Header } from "../../components/Header";
+
 
 export function Session() {
-    return(
-        <Container>
-            <Header/>
-            <Title text={"Selecione o horário"}/>
-            <Content>
-                <DateSession>
-                    <Day>Quinta-feira - 24/06/2021</Day>
-                    <div>
-                        <Hour>15:00</Hour>
-                        <Hour>19:00</Hour>
-                    </div>
-                </DateSession>
+    const [sessions, setSessions] = React.useState([]);
+    const [days, setDays] = React.useState([]);
+    const {IDmovie} = useParams();
 
-                <DateSession>
-                    <Day>Quinta-feira - 24/06/2021</Day>
-                    <div>
-                        <Hour>15:00</Hour>
-                        <Hour>19:00</Hour>
-                    </div>
-                </DateSession>
-            </Content>
-            <Footer url_select_movie={"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQt8yNufq2Jp9-D4BrCYYW5Y_jm8HXRE6NDczXQbTjV-5DMBS4o"}/>
+    React.useEffect(()=>{
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${IDmovie}/showtimes`);
+        promise.then((response)=>{
+            setSessions(response.data);
+            setDays(response.data.days);
+        })
+        promise.catch((err)=>{
+            console.log(err);
+        });
+    },[IDmovie]);
+
+    return (
+        <Container>
+                <Header/>
+                <Title text={"Selecione o horário"}/>
+                <Content>
+                    {
+                        days.map((element) => {
+                            return (
+                                <DateSession key={element.id}>
+                                    <Day>{element.date}</Day>
+                                    <div>
+                                        {element.showtimes.map((e)=>{
+                                            return(
+                                                <Hour key={e.id}>{e.name}</Hour>
+                                            )
+                                        })}
+                                    </div>
+                                </DateSession>
+                            )
+                        })
+                    } 
+                </Content>
+                <Footer 
+                    url_select_movie={sessions.posterURL} 
+                    sessionDay={sessions.title}
+                />
         </Container>
-        
     )
 }
