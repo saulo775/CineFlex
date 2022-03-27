@@ -7,7 +7,11 @@ import { Title } from "../../components/Title";
 import { Footer } from "../../components/Footer";
 
 import {
-    Container, Content, DateSession, Day, Hour,
+    Container, 
+    Content, 
+    DateSession, 
+    Day, 
+    Hour,
 } from "./style";
 
 
@@ -27,37 +31,37 @@ export function Session() {
         });
     },[IDmovie]);
 
-    return (
-        <Container>
-            <Header/>
-            <Title text={"Selecione o horário"}/>
-            <Content>
-                {
-                    days.map((element) => {
-                        return (
-                            <DateSession key={element.id}>
-                                <Day>{element.date}</Day>
-                                <div>
-                                    {element.showtimes.map((e)=>{
-                                        return(
-                                            <Link 
-                                                key={e.id}
-                                                to={`/assentos/${e.id}`}
-                                            >
-                                                <Hour>{e.name}</Hour>
-                                            </Link>
-                                        )
-                                    })}
-                                </div>
-                            </DateSession>
-                        )
-                    })
-                } 
-            </Content>
-            <Footer 
-                url_select_movie={sessions.posterURL} 
-                sessionDay={sessions.title}
-            />
-        </Container>
-    )
+        return (
+            <Container>
+                <Header/>
+                <Title text={"Selecione o horário"}/>
+                <Content>
+                    {
+                        days.map((element) => {
+                            return (
+                                <DateSession key={element.id}>
+                                    <Day>{element.date}</Day>
+                                    <div>
+                                        {element.showtimes.map((e)=>{
+                                            return(
+                                                <Link 
+                                                    key={e.id}
+                                                    to={`/assentos/${e.id}`}
+                                                >
+                                                    <Hour>{e.name}</Hour>
+                                                </Link>
+                                            )
+                                        })}
+                                    </div>
+                                </DateSession>
+                            )
+                        })
+                    } 
+                </Content>
+                <Footer 
+                    url_select_movie={sessions.posterURL} 
+                    session_day={sessions.title}
+                />
+            </Container>
+        );
 }

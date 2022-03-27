@@ -2,7 +2,7 @@ import React from "react";
 import { SeatAvailable, SeatNotAvailable, SeatSelected} from "./style";
 
 export function Seat({number_seat, is_available}) {
-    const [status, setStatus] = React.useState(true);
+    const [status, setStatus] = React.useState(is_available);
 
     function handleSelectSeat() {
         setStatus(!status);
@@ -30,7 +30,7 @@ export function Seat({number_seat, is_available}) {
         return(
             <SeatNotAvailable
                 onClick={()=>{
-                    alert("Esse assento não está disponível")
+                    alert("Esse assento não está disponível");
                 }}
             >{number_seat}</SeatNotAvailable>
         )

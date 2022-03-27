@@ -17,13 +17,33 @@ import {
 } from "./style";
 
 export function Seats() {
+    const [dataAPI, setDataAPI] = React.useState([]);
     const [seatsAPI, setSeatsAPI] = React.useState([]);
     const { IDsessao } = useParams();
+
+    const [assentos, setAssentos] = React.useState([]);
+    
+
+    function handleGetSeatsSelecteds(name) {
+        const seatNumber = parseInt(name);
+        let newSeats = [...assentos];
+        
+        let index = assentos.indexOf(seatNumber);
+
+        if (index > -1) {
+            newSeats.splice(index, 1);
+        }else {
+            newSeats.push(seatNumber);
+        }
+        setAssentos(newSeats);
+    }
+    console.log(assentos)
 
     React.useEffect(()=>{
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${IDsessao}/seats`)
         promise.then((response)=>{
             const { data } = response;
+            setDataAPI(data);
             setSeatsAPI(data.seats)
         })
         promise.catch((err)=>{
@@ -31,7 +51,7 @@ export function Seats() {
         });
     },[]);
 
-    return (
+    return Object.values(dataAPI).length > 0 ? (
         <Container>
             <Header/>
             <Content>
@@ -40,12 +60,21 @@ export function Seats() {
                     {
                         seatsAPI.map(({id, isAvailable, name})=> {
                             return(
-                                <Seat 
-                                    key={id}
-                                    id={id}
-                                    number_seat={name}
-                                    is_available={isAvailable}
-                                />
+                                <div 
+                                    onClick={()=>{
+                                        if (isAvailable) {
+                                            handleGetSeatsSelecteds(name);
+                                        }
+                                    }}
+                                    key={id}    
+                                >
+                                    
+                                    <Seat 
+                                        id={id}
+                                        number_seat={name}
+                                        is_available={isAvailable}
+                                    />
+                                </div>
                             )
                         })
                     }
@@ -78,8 +107,11 @@ export function Seats() {
                 </ClientData>
             </Content>
             <Footer 
-                url_select_movie
+                url_select_movie={dataAPI.movie.posterURL}
+                title_movie={dataAPI.movie.title}
+                session_day={dataAPI.day.weekday}
+                session_hour={dataAPI.day.date}
             />
         </Container>
-    )
+    ) : <p>carregando...</p>
 }
