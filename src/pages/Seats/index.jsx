@@ -16,11 +16,13 @@ import {
     ClientData,
 } from "./style";
 
+const CPF_REGEX = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
+
 export function Seats() {
     const [dataAPI, setDataAPI] = React.useState([]);
     const [seatsAPI, setSeatsAPI] = React.useState([]);
     const { IDsessao } = useParams();
-    const [seats, setSeats] = React.useState([{name: null, id: null}]);
+    const [seats, setSeats] = React.useState([]);
     const [cpf, setCpf] = React.useState('');
     const [userName, setUserName] = React.useState('');
 
@@ -36,9 +38,6 @@ export function Seats() {
             if (newSeats[i].name === seatNumber) {
                 index = i;
             }    
-            if (newSeats[0].name === null) {
-                newSeats.pop()
-            }
         }
 
         if (index > -1) {
@@ -66,26 +65,33 @@ export function Seats() {
         event.preventDefault();
         let ids = seats.map((element)=>{
             return element.id;
-        })
+        });
 
-        console.log(ids)
         let body = {
             ids: ids,
             name: `${userName}`,
             cpf: `${cpf}`
         }
+        console.log(body.ids)
 
-        const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", body);
+        if (body.ids.length === 0) {
+            alert("Escolha um assento!");
+        }else if(!CPF_REGEX.test(body.cpf) || body.name.length === 0){
+            alert("Preencha seus dados corretamente!");
+        }else{
+            const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", body);
+    
+            promise.then((response)=>{
+                console.log(response)
+                const data = fillStateNavigate();
+                navigate("/sucesso", {state: data});
+            });
+    
+            promise.catch((err)=>{
+                console.log(err);
+            });
+        }
 
-        promise.then((response)=>{
-            console.log(response)
-            const data = fillStateNavigate();
-            navigate("/sucesso", {state: data});
-        });
-
-        promise.catch((err)=>{
-            console.log(err);
-        });
     }
 
     function fillStateNavigate(){
