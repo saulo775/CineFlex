@@ -27,7 +27,6 @@ export const BannerMovieSelected = styled.div`
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     border: 0.5rem solid #FFFFFF;
-
     background-image: url(${props => props.url_select_movie});
     background-size: cover;
     background-repeat: no-repeat;

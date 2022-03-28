@@ -21,7 +21,6 @@ export const GlobalStyle = createGlobalStyle`
         --text-black: #293845;
         --placeholder-color: #AFAFAF;
 
-
         --seat-available: #C3CFD9;
         --border1: #808F9D;
     }

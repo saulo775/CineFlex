@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container } from "./style";
 
-export function Movie({id,image_source, movie_name}){
+export function Movie({ id, image_source, movie_name }) {
     return (
         <Container >
             <Link to={`/sessoes/${id}`}>

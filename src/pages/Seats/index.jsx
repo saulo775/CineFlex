@@ -25,7 +25,7 @@ export function Seats() {
     const [seats, setSeats] = React.useState([]);
     const [cpf, setCpf] = React.useState('');
     const [userName, setUserName] = React.useState('');
-    
+
     const navigate = useNavigate();
 
     function handleGetSeatsSelecteds(name, id) {
@@ -36,32 +36,32 @@ export function Seats() {
         for (let i = 0; i < newSeats.length; i++) {
             if (newSeats[i].name === seatNumber) {
                 index = i;
-            }    
+            }
         }
 
         if (index > -1) {
             newSeats.splice(index, 1);
-        }else {
-            newSeats.push({name:seatNumber, id:id});
+        } else {
+            newSeats.push({ name: seatNumber, id: id });
         }
         setSeats(newSeats);
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${IDsessao}/seats`)
-        promise.then((response)=>{
+        promise.then((response) => {
             const { data } = response;
             setDataAPI(data);
-            setSeatsAPI(data.seats)
+            setSeatsAPI(data.seats);
         })
-        promise.catch((err)=>{
+        promise.catch((err) => {
             console.error(err);
         });
-    },[]);
+    }, []);
 
     function handleSendData(event) {
         event.preventDefault();
-        let ids = seats.map((element)=>{
+        let ids = seats.map((element) => {
             return element.id;
         });
 
@@ -73,24 +73,24 @@ export function Seats() {
 
         if (body.ids.length === 0) {
             alert("Escolha um assento!");
-        }else if(!CPF_REGEX.test(body.cpf) || body.name.length === 0){
+        } else if (!CPF_REGEX.test(body.cpf) || body.name.length === 0) {
             alert("Preencha seus dados corretamente!");
-        }else{
+        } else {
             const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", body);
-    
-            promise.then((response)=>{
+
+            promise.then((response) => {
                 const data = fillStateNavigate();
-                navigate("/sucesso", {state: data});
+                navigate("/sucesso", { state: data });
             });
-    
-            promise.catch((err)=>{
+
+            promise.catch((err) => {
                 console.log(err);
             });
         }
 
     }
 
-    function fillStateNavigate(){
+    function fillStateNavigate() {
         const data = {
             movie: {
                 title: `${dataAPI.movie.title}`,
@@ -110,23 +110,23 @@ export function Seats() {
 
     return Object.values(dataAPI).length > 0 ? (
         <Container>
-            <Header/>
+            <Header />
             <Content>
-                <Title text={"Selecione o(s) assento(s)"}/>
+                <Title text={"Selecione o(s) assento(s)"} />
                 <SeatsContainer>
                     {
-                        seatsAPI.map(({id, isAvailable, name})=> {
-                            return(
-                                <div 
-                                    onClick={()=>{
+                        seatsAPI.map(({ id, isAvailable, name }) => {
+                            return (
+                                <div
+                                    onClick={() => {
                                         if (isAvailable) {
                                             handleGetSeatsSelecteds(name, id);
                                         }
                                     }}
-                                    key={id}    
+                                    key={id}
                                 >
-                                    
-                                    <Seat 
+
+                                    <Seat
                                         id={id}
                                         number_seat={name}
                                         is_available={isAvailable}
@@ -153,11 +153,11 @@ export function Seats() {
                 <ClientData onSubmit={handleSendData}>
                     <div>
                         <label htmlFor="super">Nome do comprador:</label>
-                        <input 
-                            id="userName" 
+                        <input
+                            id="userName"
                             type="text"
                             placeholder="Digite seu nome..."
-                            onChange={({target})=>{
+                            onChange={({ target }) => {
                                 setUserName(target.value);
                             }}
                             value={userName}
@@ -166,22 +166,22 @@ export function Seats() {
 
                     <div>
                         <label htmlFor="cpf">CPF do comprador:</label>
-                        <input 
-                            id="cpf" 
+                        <input
+                            id="cpf"
                             type="number"
                             placeholder="Digite seu CPF..."
-                            onChange={({target})=>{
+                            onChange={({ target }) => {
                                 setCpf(target.value);
                             }}
                             value={cpf}
                         />
                     </div>
-                    
 
-                    <ButtonForm title={"Reservar Assentos"} type="submit"/>
+
+                    <ButtonForm title={"Reservar Assentos"} type="submit" />
                 </ClientData>
             </Content>
-            <Footer 
+            <Footer
                 url_select_movie={dataAPI.movie.posterURL}
                 title_movie={dataAPI.movie.title}
                 session_day={dataAPI.day.weekday}

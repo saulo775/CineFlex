@@ -14,27 +14,23 @@ import {
 export function Success() {
     const location = useLocation()
 
-    const {state} = location;
-    const tickets = [...state.tickets.seats]
-    
-    let cpfFormatted = state.userData.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, 
-        function( regex, argumento1, argumento2, argumento3, argumento4 ) {
-                return argumento1 + '.' + argumento2 + '.' + argumento3 + '-' + argumento4;
+    const { state } = location;
+    const tickets = [...state.tickets.seats];
+
+    let cpfFormatted = state.userData.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,
+        function (regex, argumento1, argumento2, argumento3, argumento4) {
+            return argumento1 + '.' + argumento2 + '.' + argumento3 + '-' + argumento4;
         }
-    )
+    );
 
-    function teste() {
-        alert("click")
-    }
-
-    return(
+    return (
         <Container>
-            <Header/>
-            <Title text={"Pedido feito com sucesso!"} success={"success"}/>
+            <Header />
+            <Title text={"Pedido feito com sucesso!"} success={"success"} />
             <Content>
                 <div>
                     <h3>Filme e sessão</h3>
-                    <p>{state.movie.title} <br/>{state.movie.day} {state.movie.hour}</p>
+                    <p>{state.movie.title} <br />{state.movie.day} {state.movie.hour}</p>
                 </div>
                 <div>
                     <h3>Ingressos</h3>
@@ -49,17 +45,17 @@ export function Success() {
                 <div>
                     <h3>Comprador</h3>
                     <p>
-                        Nome: {state.userData.userName} <br/>
-                        CPF: {cpfFormatted} 
+                        Nome: {state.userData.userName} <br />
+                        CPF: {cpfFormatted}
                     </p>
                 </div>
 
             </Content>
-            <ButtonForm 
+            <ButtonForm
                 action={"submit"}
                 title="Voltar pra Home"
             />
         </Container>
-        
+
     )
 }

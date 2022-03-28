@@ -5,31 +5,31 @@ import { Header } from "../../components/Header";
 import { Movie } from "../../components/Movie";
 import { Title } from "../../components/Title";
 
-import { 
+import {
     Container,
 } from "./style";
 
 export function Home() {
     const [movies, setMovies] = React.useState([]);
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         const response = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
-        response.then(({data})=>{
+        response.then(({ data }) => {
             setMovies(data);
-        }).catch((error)=>{
+        }).catch((error) => {
             console.log(error);
         });
-    },[]);
+    }, []);
 
     return (
         <>
-            <Header/>
-            <Title text="Selecione o filme"/>   
+            <Header />
+            <Title text="Selecione o filme" />
             <Container>
                 {
-                    movies.map(({id, posterURL, title}) => {
-                        return(
-                            <Movie 
+                    movies.map(({ id, posterURL, title }) => {
+                        return (
+                            <Movie
                                 key={id}
                                 id={id}
                                 image_source={posterURL}
@@ -40,6 +40,6 @@ export function Home() {
                 }
             </Container>
         </>
-        
+
     )
 }
