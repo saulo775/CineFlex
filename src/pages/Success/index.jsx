@@ -23,6 +23,10 @@ export function Success() {
         }
     )
 
+    function teste() {
+        alert("click")
+    }
+
     return(
         <Container>
             <Header/>
@@ -51,7 +55,10 @@ export function Success() {
                 </div>
 
             </Content>
-            <ButtonForm title="Voltar pra Home"/>
+            <ButtonForm 
+                action={"submit"}
+                title="Voltar pra Home"
+            />
         </Container>
         
     )

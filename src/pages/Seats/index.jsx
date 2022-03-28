@@ -45,7 +45,6 @@ export function Seats() {
             newSeats.push({name:seatNumber, id:id});
         }
         setSeats(newSeats);
-        console.log(newSeats)
     }
 
     React.useEffect(()=>{
@@ -71,7 +70,6 @@ export function Seats() {
             name: `${userName}`,
             cpf: `${cpf}`
         }
-        console.log(body.ids)
 
         if (body.ids.length === 0) {
             alert("Escolha um assento!");
@@ -81,7 +79,6 @@ export function Seats() {
             const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", body);
     
             promise.then((response)=>{
-                console.log(response)
                 const data = fillStateNavigate();
                 navigate("/sucesso", {state: data});
             });
