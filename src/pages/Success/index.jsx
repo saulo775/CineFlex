@@ -1,4 +1,6 @@
 import React from "react";
+import { useLocation } from 'react-router-dom';
+
 import { Title } from "../../components/Title";
 import { ButtonForm } from "../../components/ButtonForm";
 import { Header } from "../../components/Header";
@@ -10,6 +12,10 @@ import {
 } from "./style";
 
 export function Success() {
+    const location = useLocation()
+
+    console.log(location.state)
+
     return(
         <Container>
             <Header/>
