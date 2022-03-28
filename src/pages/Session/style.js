@@ -3,12 +3,14 @@ import styled from "styled-components";
 export const Container = styled.div`
     flex: 1;
     display: flex;
-    gap: 1.5rem;
     flex-direction: column;
-    height: 90vh;
+    height: 100vh;
     max-width: 40rem;
     overflow-y: scroll;
     justify-content: space-between;
+    ::-webkit-scrollbar { 
+        display: none;
+    }
 `;
 
 export const Content = styled.div`
@@ -17,6 +19,7 @@ export const Content = styled.div`
     flex-direction: column;
     padding: 0 1.5rem;
     gap: 1.5rem;
+    margin-bottom: 1.5rem;
 `;
 
 export const DateSession = styled.div`

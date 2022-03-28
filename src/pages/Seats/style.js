@@ -6,7 +6,7 @@ export const Container = styled.section`
     justify-content: space-between;
     flex-direction: column;
     max-width: 40rem;
-    `;
+`;
 
 export const Content = styled.div`
     flex: 1;
@@ -14,6 +14,9 @@ export const Content = styled.div`
     height: 100%;
     flex-direction: column;
     overflow-y: scroll;
+    ::-webkit-scrollbar { 
+        display: none;
+    }
 `;
 
 export const SeatsContainer = styled.div`
@@ -24,6 +27,13 @@ export const SeatsContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 0 1.5rem;
+
+    div {
+        margin: 0 auto;
+        border-radius: 50%;
+        width: 1.65rem;
+        height: 1.65rem;
+    }
 `;
 
 export const Legend = styled.ul`

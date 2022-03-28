@@ -7,6 +7,9 @@ export const Container = styled.section`
     height: 100vh;
     max-width: 40rem;
     overflow-y: scroll;
+    ::-webkit-scrollbar { 
+        display: none;
+    }
 `;
 
 
