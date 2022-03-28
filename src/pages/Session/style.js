@@ -9,7 +9,7 @@ export const Container = styled.div`
     max-width: 40rem;
     overflow-y: scroll;
     justify-content: space-between;
-    `;
+`;
 
 export const Content = styled.div`
     flex: 1;

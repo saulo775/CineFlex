@@ -20,24 +20,34 @@ export function Seats() {
     const [dataAPI, setDataAPI] = React.useState([]);
     const [seatsAPI, setSeatsAPI] = React.useState([]);
     const { IDsessao } = useParams();
-    const [seats, setSeats] = React.useState([]);
+    const [seats, setSeats] = React.useState([{name: null, id: null}]);
     const [cpf, setCpf] = React.useState('');
     const [userName, setUserName] = React.useState('');
 
+
     const navigate = useNavigate();
 
-    function handleGetSeatsSelecteds(name) {
+    function handleGetSeatsSelecteds(name, id) {
         const seatNumber = parseInt(name);
         let newSeats = [...seats];
+        let index = -1;
 
-        let index = seats.indexOf(seatNumber);
+        for (let i = 0; i < newSeats.length; i++) {
+            if (newSeats[i].name === seatNumber) {
+                index = i;
+            }    
+            if (newSeats[0].name === null) {
+                newSeats.pop()
+            }
+        }
 
         if (index > -1) {
             newSeats.splice(index, 1);
         }else {
-            newSeats.push(seatNumber);
+            newSeats.push({name:seatNumber, id:id});
         }
         setSeats(newSeats);
+        console.log(newSeats)
     }
 
     React.useEffect(()=>{
@@ -54,9 +64,28 @@ export function Seats() {
 
     function handleSendData(event) {
         event.preventDefault();
-        const data = fillStateNavigate();
-        navigate("/sucesso", {state: data});
+        let ids = seats.map((element)=>{
+            return element.id;
+        })
 
+        console.log(ids)
+        let body = {
+            ids: ids,
+            name: `${userName}`,
+            cpf: `${cpf}`
+        }
+
+        const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", body);
+
+        promise.then((response)=>{
+            console.log(response)
+            const data = fillStateNavigate();
+            navigate("/sucesso", {state: data});
+        });
+
+        promise.catch((err)=>{
+            console.log(err);
+        });
     }
 
     function fillStateNavigate(){
@@ -72,7 +101,6 @@ export function Seats() {
             userData: {
                 cpf: `${cpf}`,
                 userName: `${userName}`,
-
             }
         }
         return data;
@@ -90,7 +118,7 @@ export function Seats() {
                                 <div 
                                     onClick={()=>{
                                         if (isAvailable) {
-                                            handleGetSeatsSelecteds(name);
+                                            handleGetSeatsSelecteds(name, id);
                                         }
                                     }}
                                     key={id}    

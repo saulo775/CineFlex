@@ -14,7 +14,6 @@ import {
     Hour,
 } from "./style";
 
-
 export function Session() {
     const [sessions, setSessions] = React.useState([]);
     const [days, setDays] = React.useState([]);
