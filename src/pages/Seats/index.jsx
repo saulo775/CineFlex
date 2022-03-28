@@ -25,8 +25,7 @@ export function Seats() {
     const [seats, setSeats] = React.useState([]);
     const [cpf, setCpf] = React.useState('');
     const [userName, setUserName] = React.useState('');
-
-
+    
     const navigate = useNavigate();
 
     function handleGetSeatsSelecteds(name, id) {
@@ -98,11 +97,11 @@ export function Seats() {
         const data = {
             movie: {
                 title: `${dataAPI.movie.title}`,
-                day: `${dataAPI.day.weekday}`,
-                hour: `${dataAPI.day.date}`
+                day: `${dataAPI.day.date}`,
+                hour: `${dataAPI.name}`
             },
             tickets: {
-                seats: `${seats}`
+                seats: [...seats]
             },
             userData: {
                 cpf: `${cpf}`,

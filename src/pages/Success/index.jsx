@@ -14,7 +14,14 @@ import {
 export function Success() {
     const location = useLocation()
 
-    console.log(location.state)
+    const {state} = location;
+    const tickets = [...state.tickets.seats]
+    
+    let cpfFormatted = state.userData.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, 
+        function( regex, argumento1, argumento2, argumento3, argumento4 ) {
+                return argumento1 + '.' + argumento2 + '.' + argumento3 + '-' + argumento4;
+        }
+    )
 
     return(
         <Container>
@@ -23,19 +30,23 @@ export function Success() {
             <Content>
                 <div>
                     <h3>Filme e sessão</h3>
-                    <p>Enola Holmes <br/>24/06/2021 15:00</p>
+                    <p>{state.movie.title} <br/>{state.movie.day} {state.movie.hour}</p>
                 </div>
                 <div>
                     <h3>Ingressos</h3>
-                    <p>ingresso 1</p>
-                    <p>ingresso 2</p>
-                    <p>ingresso 3</p>
+                    {
+                        tickets.map(element => {
+                            return (
+                                <p key={element.id}>Assento {element.name}</p>
+                            )
+                        })
+                    }
                 </div>
                 <div>
                     <h3>Comprador</h3>
                     <p>
-                        Nome: João da Silva Sauro <br/>
-                        CPF: 123.456.789-10
+                        Nome: {state.userData.userName} <br/>
+                        CPF: {cpfFormatted} 
                     </p>
                 </div>
 
